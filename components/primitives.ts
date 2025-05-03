@@ -1,3 +1,4 @@
+import { user } from "@heroui/theme";
 import { tv } from "tailwind-variants";
 
 export const title = tv({
