@@ -13,7 +13,7 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-3xl">
-        <div className="flex flex-col items-center p-6 rounded-lg shadow-md bg-default-100">
+        <div className="group flex flex-col items-center p-6 rounded-lg shadow-md bg-default-100 cursor-pointer select-none transition-colors duration-200 hover:bg-default-200">
           <svg
             className="w-12 h-12 text-primary mb-4"
             fill="none"
@@ -36,7 +36,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex flex-col items-center p-6 rounded-lg shadow-md bg-default-100">
+        <div className="group flex flex-col items-center p-6 rounded-lg shadow-md bg-default-100 cursor-pointer select-none transition-colors duration-200 hover:bg-default-200">
           <svg
             className="w-12 h-12 text-success mb-4"
             fill="none"
@@ -59,7 +59,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="flex flex-col items-center p-6 rounded-lg shadow-md bg-default-100">
+        <div className="group flex flex-col items-center p-6 rounded-lg shadow-md bg-default-100 cursor-pointer select-none transition-colors duration-200 hover:bg-default-200">
           <svg
             className="w-12 h-12 text-warning mb-4"
             fill="none"
@@ -91,4 +91,3 @@ export default function Home() {
     </section>
   );
 }
-// This is a simple landing page for a payment tracking application. It includes a title, subtitle, and three feature cards that highlight the app's key benefits: effortless tracking, clear insights, and security. A button at the bottom encourages users to get started for free.
