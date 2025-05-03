@@ -5,7 +5,7 @@ import NextLink from "next/link";
 export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-8 py-8 md:py-10">
-      <div className="flex flex-col items-center gap-2 text-center">
+      <div className="flex flex-col items-center gap-2 text-center select-none">
         <h1 className={title()}>Konnect - Your Payment Partner</h1>
         <p className={subtitle()}>
           Track your payments with ease and gain control over your finances.
