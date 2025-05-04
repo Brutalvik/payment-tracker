@@ -28,7 +28,7 @@ export const Navbar = () => {
       aria-label="Search"
       classNames={{
         inputWrapper: "bg-default-100",
-        input: "text-sm",
+        input: "text-lg",
       }}
       endContent={
         <Kbd className="hidden lg:inline-block" keys={["command"]}>
@@ -104,7 +104,19 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarMenu>
-        {searchInput}
+        <div className="flex flex-col gap-2">
+          {searchInput}
+          <Button
+            isExternal
+            as={Link}
+          
+            startContent={<SearchIcon className="text-danger" />}
+            variant="solid"
+          >
+            Track
+          </Button>
+        </div>
+
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>

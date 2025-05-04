@@ -113,12 +113,13 @@ export default function BlogPage() {
                 "col-span-12 sm:col-span-6 lg:col-span-4",
                 "h-[300px]",
                 "transition-all duration-300",
-                "hover:shadow-lg hover:scale-[1.02]",
+                "hover:shadow-lg hover:scale-[1.02] cursor-pointer",
                 "border border-default-200",
                 "bg-card",
                 "shadow-md"
               )}
               style={{ marginBottom: "1.5rem" }}
+             
             >
               <CardHeader className="absolute z-10 top-1 flex-col !items-start">
                 <p className="text-tiny text-white/60 uppercase font-bold">
@@ -135,6 +136,33 @@ export default function BlogPage() {
                 src={news.imageUrl || "https://placehold.co/400x300"}
                 style={{ aspectRatio: "16 / 9" }}
               />
+              <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                <div className="flex flex-grow gap-2 items-center">
+                  <Image
+                    alt="News source icon"
+                    className="rounded-full w-10 h-11 bg-white"
+                    src={GUARDIAN_URL}
+                  />
+                  <div className="flex flex-col">
+                    <p className="text-tiny text-white/60">
+                      {news.source.name}
+                    </p>
+                    <p className="text-tiny text-white/60">
+                      Get the latest news.
+                    </p>
+                  </div>
+                </div>
+                <Link href={news.url} isExternal>
+                  <Button
+                    className="text-tiny"
+                    color="primary"
+                    radius="full"
+                    size="sm"
+                  >
+                    Read More
+                  </Button>
+                </Link>
+              </CardFooter>
             </Card>
           );
         } else if (index === 3) {
@@ -169,6 +197,21 @@ export default function BlogPage() {
                 style={{ aspectRatio: "16 / 9" }}
               />
               <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                <div className="flex flex-grow gap-2 items-center">
+                  <Image
+                    alt="News source icon"
+                    className="rounded-full w-10 h-11 bg-white"
+                    src={GUARDIAN_URL}
+                  />
+                  <div className="flex flex-col">
+                    <p className="text-tiny text-white/60">
+                      {news.source.name}
+                    </p>
+                    <p className="text-tiny text-white/60">
+                      Get the latest news.
+                    </p>
+                  </div>
+                </div>
                 <Link href={news.url} isExternal>
                   <Button
                     className="text-tiny"
