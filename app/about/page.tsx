@@ -9,7 +9,6 @@ import {
   Users,
   Award,
   Zap,
-  ChevronRight,
 } from "lucide-react";
 
 // Animation variants
@@ -69,7 +68,7 @@ const AboutPage = () => {
 
   return (
     <div
-      className="min-h-screen bg-black" // Changed to black
+      className="min-h-screen" // Changed to black
     >
       <header className="py-12 text-center" style={{ userSelect: "none" }}>
         {" "}
@@ -78,7 +77,7 @@ const AboutPage = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-green-700 to-blue-500"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold text-default-600 "
         >
           About Us
         </motion.h1>
@@ -86,7 +85,7 @@ const AboutPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
-          className="text-gray-400 text-lg sm:text-xl mt-4 max-w-2xl mx-auto"
+          className="text-default-600 text-lg sm:text-xl mt-4 max-w-2xl mx-auto"
         >
           We are a team of passionate individuals dedicated to transforming the
           way the world ships.
@@ -104,7 +103,7 @@ const AboutPage = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-0 auto"
         >
           {features.map((feature, index) => {
             const Icon = feature.icon;
@@ -113,16 +112,16 @@ const AboutPage = () => {
                 key={index}
                 variants={itemVariants}
                 className={cn(
-                  "bg-white/5 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10",
-                  "transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20 cursor-pointer", // Added cursor-pointer
+                  "bg-default-100 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-default-100/10  hover:bg-default-200",
+                  "transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer", // Added cursor-pointer
                   "flex flex-col items-start gap-4"
                 )}
               >
                 <Icon className="w-8 h-8 text-blue-400" />
-                <h3 className="text-2xl font-semibold text-white">
+                <h3 className="text-2xl font-semibold text-default-600">
                   {feature.title}
                 </h3>
-                <p className="text-gray-300">{feature.description}</p>
+                <p className="text-default-500">{feature.description}</p>
               </motion.div>
             );
           })}
@@ -137,7 +136,7 @@ const AboutPage = () => {
         {" "}
         {/* Added userSelect */}
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-default-600 mb-8">
             Our Achievements
           </h2>
           <motion.div
@@ -149,32 +148,38 @@ const AboutPage = () => {
           >
             <div
               className={cn(
-                "bg-white/5 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 text-center",
-                "transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20 cursor-pointer", // Added cursor-pointer
+                "bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10  hover:bg-default-200",
+                "transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center", // Added cursor-pointer
               )}
             >
               {/* Added cursor-pointer */}
               <Award className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-semibold text-white">10+</h3>
-              <p className="text-gray-300">Awards Won</p>
+              <h3 className="text-2xl font-semibold text-default-600">10+</h3>
+              <p className="text-default-400">Awards Won</p>
             </div>
-            <div  className={cn(
-                "bg-white/5 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 text-center",
-                "transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20 cursor-pointer", // Added cursor-pointer
-              )}>
+            <div
+              className={cn(
+                "bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10  hover:bg-default-200",
+                "transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center", // Added cursor-pointer
+              )}
+            >
               {/* Added cursor-pointer */}
               <Users className="w-12 h-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-semibold text-white">100,000+</h3>
-              <p className="text-gray-300">Happy Customers</p>
+              <h3 className="text-2xl font-semibold text-default-600">
+                100,000+
+              </h3>
+              <p className="text-default-400">Happy Customers</p>
             </div>
-            <div   className={cn(
-                "bg-white/5 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 text-center",
-                "transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20 cursor-pointer", // Added cursor-pointer
-              )}>
+            <div
+              className={cn(
+                "bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10 hover:bg-default-200",
+                "transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center",
+              )}
+            >
               {/* Added cursor-pointer */}
               <Zap className="w-12 h-12 text-red-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-semibold text-white">99.9%</h3>
-              <p className="text-gray-300">On-Time Delivery</p>
+              <h3 className="text-2xl font-semibold text-default-600">99.9%</h3>
+              <p className="text-default-400">On-Time Delivery</p>
             </div>
           </motion.div>
         </div>
