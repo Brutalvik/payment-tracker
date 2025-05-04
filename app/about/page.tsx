@@ -70,9 +70,7 @@ const AboutPage = () => {
   return (
     <div
       className="min-h-screen bg-black" // Changed to black
-      style={{
-        background: "linear-gradient(to bottom, #000000, #130025, #000000)", //Kept shiny
-      }}
+ 
     >
       <header className="py-12 text-center" style={{ userSelect: "none" }}>
         {" "}
@@ -81,7 +79,7 @@ const AboutPage = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
-          className="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
+          className="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-green-700 to-blue-500"
         >
           About Us
         </motion.h1>
