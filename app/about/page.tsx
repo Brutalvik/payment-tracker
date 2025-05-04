@@ -70,7 +70,6 @@ const AboutPage = () => {
   return (
     <div
       className="min-h-screen bg-black" // Changed to black
- 
     >
       <header className="py-12 text-center" style={{ userSelect: "none" }}>
         {" "}
@@ -148,22 +147,30 @@ const AboutPage = () => {
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 text-center cursor-pointer">
-              {" "}
+            <div
+              className={cn(
+                "bg-white/5 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 text-center",
+                "transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20 cursor-pointer", // Added cursor-pointer
+              )}
+            >
               {/* Added cursor-pointer */}
               <Award className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
               <h3 className="text-2xl font-semibold text-white">10+</h3>
               <p className="text-gray-300">Awards Won</p>
             </div>
-            <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 text-center cursor-pointer">
-              {" "}
+            <div  className={cn(
+                "bg-white/5 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 text-center",
+                "transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20 cursor-pointer", // Added cursor-pointer
+              )}>
               {/* Added cursor-pointer */}
               <Users className="w-12 h-12 text-green-400 mx-auto mb-4" />
               <h3 className="text-2xl font-semibold text-white">100,000+</h3>
               <p className="text-gray-300">Happy Customers</p>
             </div>
-            <div className="bg-white/5 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 text-center cursor-pointer">
-              {" "}
+            <div   className={cn(
+                "bg-white/5 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-white/10 text-center",
+                "transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/20 cursor-pointer", // Added cursor-pointer
+              )}>
               {/* Added cursor-pointer */}
               <Zap className="w-12 h-12 text-red-400 mx-auto mb-4" />
               <h3 className="text-2xl font-semibold text-white">99.9%</h3>
