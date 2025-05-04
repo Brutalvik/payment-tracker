@@ -4,11 +4,12 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
-  Rocket,
-  BookOpen,
-  Users,
-  Award,
-  Zap,
+  Banknote, 
+  Building2, 
+  Gavel, 
+  ChartBar, 
+  Bolt,
+  Users, 
 } from "lucide-react";
 
 // Animation variants
@@ -34,22 +35,22 @@ const itemVariants = {
 // Dummy data for features
 const features = [
   {
-    title: "Mission",
+    title: "Our Mission",
     description:
-      "To revolutionize the shipping industry with transparency, efficiency, and cutting-edge technology.",
-    icon: Rocket,
+      "To provide secure, transparent, and efficient payment solutions for everyone.", // Updated
+    icon: Banknote, // Updated
   },
   {
-    title: "Vision",
+    title: "Our Vision",
     description:
-      "To be the most trusted and innovative shipping partner globally.",
-    icon: BookOpen,
+      "To be the leading global platform for seamless and reliable financial transactions.", // Updated
+    icon: Building2, // Updated
   },
   {
-    title: "Values",
+    title: "Our Values",
     description:
-      "Customer-centricity, Innovation, Integrity, Collaboration, and Excellence.",
-    icon: Users,
+      "Integrity, Security, Customer Focus, Innovation, and Compliance.", // Updated
+    icon: Gavel, // Updated
   },
 ];
 
@@ -58,7 +59,7 @@ const AboutPage = () => {
 
   useEffect(() => {
     const checkIsDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1024); // Consider it desktop if width is >= 1024
+      setIsDesktop(window.innerWidth >= 1024);
     };
 
     checkIsDesktop();
@@ -67,12 +68,8 @@ const AboutPage = () => {
   }, []);
 
   return (
-    <div
-      className="min-h-screen" // Changed to black
-    >
+    <div className="min-h-screen">
       <header className="py-12 text-center" style={{ userSelect: "none" }}>
-        {" "}
-        {/* Added userSelect */}
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -87,8 +84,8 @@ const AboutPage = () => {
           transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
           className="text-default-600 text-lg sm:text-xl mt-4 max-w-2xl mx-auto"
         >
-          We are a team of passionate individuals dedicated to transforming the
-          way the world ships.
+          We are dedicated to providing secure and efficient payment solutions.{" "}
+          {/* Updated */}
         </motion.p>
       </header>
 
@@ -97,8 +94,6 @@ const AboutPage = () => {
         className="py-16 px-4 sm:px-6 lg:px-8"
         style={{ userSelect: "none" }}
       >
-        {" "}
-        {/* Added userSelect */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -113,7 +108,7 @@ const AboutPage = () => {
                 variants={itemVariants}
                 className={cn(
                   "bg-default-100 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-default-100/10  hover:bg-default-200",
-                  "transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer", // Added cursor-pointer
+                  "transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer",
                   "flex flex-col items-start gap-4"
                 )}
               >
@@ -133,8 +128,6 @@ const AboutPage = () => {
         className="py-16 px-4 sm:px-6 lg:px-8"
         style={{ userSelect: "none" }}
       >
-        {" "}
-        {/* Added userSelect */}
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-bold text-center text-default-600 mb-8">
             Our Achievements
@@ -146,40 +139,25 @@ const AboutPage = () => {
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            <div
-              className={cn(
-                "bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10  hover:bg-default-200",
-                "transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center", // Added cursor-pointer
-              )}
-            >
-              {/* Added cursor-pointer */}
-              <Award className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-semibold text-default-600">10+</h3>
-              <p className="text-default-400">Awards Won</p>
+            <div className="bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10  hover:bg-default-200 transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center">
+              <ChartBar className="w-12 h-12 text-yellow-400 mx-auto mb-4" />{" "}
+              {/* Updated */}
+              <h3 className="text-2xl font-semibold text-default-600">$10B+</h3>
+              <p className="text-default-400">Transactions Processed</p>{" "}
+              {/* Updated */}
             </div>
-            <div
-              className={cn(
-                "bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10  hover:bg-default-200",
-                "transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center", // Added cursor-pointer
-              )}
-            >
-              {/* Added cursor-pointer */}
+            <div className="bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10  hover:bg-default-200 transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center">
               <Users className="w-12 h-12 text-green-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-semibold text-default-600">
-                100,000+
-              </h3>
-              <p className="text-default-400">Happy Customers</p>
+              <h3 className="text-2xl font-semibold text-default-600">1M+</h3>
+              <p className="text-default-400">Active Users</p> {/* Updated */}
             </div>
-            <div
-              className={cn(
-                "bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10 hover:bg-default-200",
-                "transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center",
-              )}
-            >
-              {/* Added cursor-pointer */}
-              <Zap className="w-12 h-12 text-red-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-semibold text-default-600">99.9%</h3>
-              <p className="text-default-400">On-Time Delivery</p>
+            <div className="bg-default-100 backdrop-blur-lg rounded-xl p-10  shadow-lg border border-default-100/10 hover:bg-default-200 transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center">
+              <Bolt className="w-12 h-12 text-red-400 mx-auto mb-4" />{" "}
+              {/* Updated */}
+              <h3 className="text-2xl font-semibold text-default-600">
+                99.99%
+              </h3>
+              <p className="text-default-400">Uptime</p> {/* Updated */}
             </div>
           </motion.div>
         </div>
@@ -189,9 +167,11 @@ const AboutPage = () => {
         className="py-12 text-center text-gray-400"
         style={{ userSelect: "none" }}
       >
-        {" "}
-        {/* Added userSelect */}
-        <p>&copy; {new Date().getFullYear()} Konnect. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} Global Finance Inc. All rights
+          reserved.
+        </p>{" "}
+        {/* Updated */}
       </footer>
     </div>
   );
