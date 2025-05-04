@@ -108,7 +108,7 @@ const AboutPage = () => {
                 variants={itemVariants}
                 className={cn(
                   "bg-default-100 backdrop-blur-lg rounded-xl p-6 shadow-lg border border-default-100/10  hover:bg-default-200",
-                  "transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer",
+                  "transition-all duration-300 hover:scale-[1.04] hover:shadow-blue-700/50 cursor-pointer",
                   "flex flex-col items-start gap-4"
                 )}
               >
@@ -139,19 +139,19 @@ const AboutPage = () => {
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            <div className="bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10  hover:bg-default-200 transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center">
+            <div className="bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10  hover:bg-default-200 transition-all duration-300 hover:scale-[1.04] hover:shadow-blue-700/50 cursor-pointer text-center">
               <ChartBar className="w-12 h-12 text-yellow-400 mx-auto mb-4" />{" "}
               {/* Updated */}
               <h3 className="text-2xl font-semibold text-default-600">$10B+</h3>
               <p className="text-default-400">Transactions Processed</p>{" "}
               {/* Updated */}
             </div>
-            <div className="bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10  hover:bg-default-200 transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center">
+            <div className="bg-default-100 backdrop-blur-lg rounded-xl p-10 shadow-lg border border-default-100/10  hover:bg-default-200 transition-all duration-300 hover:scale-[1.04] hover:shadow-blue-700/50 cursor-pointer text-center">
               <Users className="w-12 h-12 text-green-400 mx-auto mb-4" />
               <h3 className="text-2xl font-semibold text-default-600">1M+</h3>
               <p className="text-default-400">Active Users</p> {/* Updated */}
             </div>
-            <div className="bg-default-100 backdrop-blur-lg rounded-xl p-10  shadow-lg border border-default-100/10 hover:bg-default-200 transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-700 cursor-pointer text-center">
+            <div className="bg-default-100 backdrop-blur-lg rounded-xl p-10  shadow-lg border border-default-100/10 hover:bg-default-200 transition-all duration-300 hover:scale-[1.04] hover:shadow-blue-700/50 cursor-pointer text-center">
               <Bolt className="w-12 h-12 text-red-400 mx-auto mb-4" />{" "}
               {/* Updated */}
               <h3 className="text-2xl font-semibold text-default-600">
