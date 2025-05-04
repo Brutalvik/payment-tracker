@@ -29,6 +29,7 @@ const TrackerPage = () => {
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false); // Added loading state
+  
 
   // Progress bar stages and status mapping
   const stages = [
@@ -197,7 +198,7 @@ const TrackerPage = () => {
           <div className="flex items-center gap-4">
             <Input
               type="text"
-              placeholder="Enter 8-digit tracking number"
+              placeholder="Enter 14-digit tracking number"
               value={trackingNumber}
               onChange={(e) => setTrackingNumber(e.target.value)}
               className={cn(

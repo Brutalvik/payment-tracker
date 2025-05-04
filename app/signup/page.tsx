@@ -7,6 +7,7 @@ import { Alert } from "@heroui/alert";
 import { AlertCircle, UserPlus, Mail, Lock, Flag, XCircle } from "lucide-react"; // Adjust the import path if necessary
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 
 const countryCodeData = {
@@ -45,6 +46,7 @@ const RestrictedSignupPage = () => {
     termsAgreed: false,
   });
   const [error, setError] = useState<string | null>(null);
+   const router = useRouter();
 
   // Simulate fetching user's country code.
   useEffect(() => {
@@ -151,7 +153,9 @@ Terms Agreed: ${additionalInfo.termsAgreed ? "Yes" : "No"}`);
                 variant="bordered"
                 size="sm"
                 className="mt-6 text-md text-red-200 hover:text-red-100 hover:bg-red-800/50 border-red-400/80"
-                onClick={() => setIsRestricted(false)} // Provide a way to bypass for testing
+                onClick={() => {
+        router.push('/'); // Redirect to the home page
+    }} 
               >
                 <XCircle className="mr-2 h-4 w-4" />
                 Dismiss
