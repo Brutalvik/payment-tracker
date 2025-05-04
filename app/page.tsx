@@ -6,6 +6,7 @@ import { Button } from "@heroui/button";
 import NextLink from "next/link";
 import { TrendingUp, Zap, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Footer from "@/components/footer";
 
 // Animation variants
 const containerVariants = {
@@ -114,16 +115,16 @@ export default function Home() {
           href="/signup"
           size="lg"
           className={cn(
-            "bg-blue-950",
-            "text-white px-8 py-3 rounded-full shadow-lg",
+            "bg-blue-500 text-white px-8 py-3 rounded-full shadow-lg",
             "transition-all duration-300 hover:scale-105 hover:shadow-blue-400/30",
             "font-semibold text-lg"
           )}
-          variant="shadow"
+          variant="solid"
         >
           Get Started for Free
         </Button>
       </motion.div>
+      <Footer/>
     </motion.section>
   );
 }
