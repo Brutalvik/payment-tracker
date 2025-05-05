@@ -1,14 +1,15 @@
 import React from "react";
 import { Alert } from "@heroui/alert"; // Changed import paths
 import { Mail } from "lucide-react";
+import Footer from "@/components/footer";
 
 
 const PrivacyPolicyPage = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background text-foreground px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center space-y-4">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 py-2">
             Privacy Policy
           </h1>
           <p
@@ -20,7 +21,7 @@ const PrivacyPolicyPage = () => {
         </div>
 
         <div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+          className="grid grid-cols-1 gap-6"
           style={{ userSelect: "none" }} // Added userSelect style
         >
           <section className="bg-card rounded-xl shadow-lg border border-border p-6 space-y-4">
@@ -143,6 +144,7 @@ const PrivacyPolicyPage = () => {
           </section>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

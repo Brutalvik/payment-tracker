@@ -122,7 +122,7 @@ const Footer = () => {
         <div className="text-center text-sm">
           &copy; {new Date().getFullYear()} Konnect. All rights reserved. |{" "}
           <Link
-            href="#"
+            href="/terms-and-conditions"
             className="underline hover:text-blue-400 transition-colors"
           >
             Terms of Service
