@@ -3,14 +3,12 @@ import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
 import {
   Mail,
-  Phone,
-  MapPin,
   ChevronRight,
   Facebook,
   Twitter,
   Linkedin,
-  Github,
 } from "lucide-react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -113,7 +111,7 @@ const Footer = () => {
             </div>
             <div className="mt-4 text-xs text-gray-400">
               By subscribing, you agree to our{" "}
-              <a href="#" className="underline">
+              <a href="/privacy-policy" className="underline">
                 Privacy Policy
               </a>
               .
@@ -123,19 +121,19 @@ const Footer = () => {
         <hr className="my-8 border-gray-700" />
         <div className="text-center text-sm">
           &copy; {new Date().getFullYear()} Konnect. All rights reserved. |{" "}
-          <a
+          <Link
             href="#"
             className="underline hover:text-blue-400 transition-colors"
           >
             Terms of Service
-          </a>{" "}
+          </Link>{" "}
           |{" "}
-          <a
-            href="#"
+          <Link
+            href="/privacy-policy"
             className="underline hover:text-blue-400 transition-colors"
           >
             Privacy Policy
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

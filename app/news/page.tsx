@@ -6,6 +6,7 @@ import axios from "axios";
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { Spinner } from "@heroui/spinner";
+import Footer from "@/components/footer";
 
 //  Important:  NEXT_PUBLIC_  for client-side access
 const GUARDIAN_API_KEY = process.env.NEXT_PUBLIC_GUARDIAN_API_KEY;
@@ -103,190 +104,196 @@ export default function BlogPage() {
   }
 
   return (
-    <div className="max-w-[1200px] gap-6 grid grid-cols-12 px-4 sm:px-8">
-      {newsHeadlines.map((news, index) => {
-        if (index < 3) {
-          return (
-            <Card
-              key={index}
-              className={cn(
-                "col-span-12 sm:col-span-6 lg:col-span-4",
-                "h-[300px]",
-                "transition-all duration-300",
-                "hover:shadow-lg hover:scale-[1.02] cursor-pointer",
-                "border border-default-200",
-                "bg-card",
-                "shadow-md"
-              )}
-              style={{ marginBottom: "1.5rem" }}
-             
-            >
-              <CardHeader className="absolute z-10 top-1 flex-col !items-start">
-                <p className="text-tiny text-white/60 uppercase font-bold">
-                  What to watch
-                </p>
-                <h4 className="text-white font-medium text-large">
-                  {news.title}
-                </h4>
-              </CardHeader>
-              <Image
-                removeWrapper
-                alt={news.title}
-                className="z-0 w-full h-full object-cover rounded-t-lg"
-                src={news.imageUrl || "https://placehold.co/400x300"}
-                style={{ aspectRatio: "16 / 9" }}
-              />
-              <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
-                <div className="flex flex-grow gap-2 items-center">
-                  <Image
-                    alt="News source icon"
-                    className="rounded-full w-10 h-11 bg-white"
-                    src={GUARDIAN_URL}
-                  />
-                  <div className="flex flex-col">
-                    <p className="text-tiny text-white/60">
-                      {news.source.name}
-                    </p>
-                    <p className="text-tiny text-white/60">
-                      Get the latest news.
-                    </p>
+    <>
+      <div className="max-w-[1200px] gap-6 grid grid-cols-12 px-4 sm:px-8">
+        {newsHeadlines.map((news, index) => {
+          if (index < 3) {
+            return (
+              <Card
+                key={index}
+                className={cn(
+                  "col-span-12 sm:col-span-6 lg:col-span-4",
+                  "h-[300px]",
+                  "transition-all duration-300",
+                  "hover:shadow-lg hover:scale-[1.02] cursor-pointer",
+                  "border border-default-200",
+                  "bg-card",
+                  "shadow-md"
+                )}
+                style={{ marginBottom: "1.5rem" }}
+              >
+                <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+                  <p className="text-tiny text-white/60 uppercase font-bold">
+                    What to watch
+                  </p>
+                  <h4 className="text-white font-medium text-large">
+                    {news.title}
+                  </h4>
+                </CardHeader>
+                <Image
+                  removeWrapper
+                  alt={news.title}
+                  className="z-0 w-full h-full object-cover rounded-t-lg"
+                  src={news.imageUrl || "https://placehold.co/400x300"}
+                  style={{ aspectRatio: "16 / 9" }}
+                />
+                <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                  <div className="flex flex-grow gap-2 items-center">
+                    <Image
+                      alt="News source icon"
+                      className="rounded-full w-10 h-11 bg-white"
+                      src={GUARDIAN_URL}
+                    />
+                    <div className="flex flex-col">
+                      <p className="text-tiny text-white/60">
+                        {news.source.name}
+                      </p>
+                      <p className="text-tiny text-white/60">
+                        Get the latest news.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <Link href={news.url} isExternal>
-                  <Button
-                    className="text-tiny"
-                    color="primary"
-                    radius="full"
-                    size="sm"
+                  <Link href={news.url} isExternal>
+                    <Button
+                      className="text-tiny"
+                      color="primary"
+                      radius="full"
+                      size="sm"
+                    >
+                      Read More
+                    </Button>
+                  </Link>
+                </CardFooter>
+              </Card>
+            );
+          } else if (index === 3) {
+            return (
+              <Card
+                isFooterBlurred
+                key={index}
+                className={cn(
+                  "w-full h-[300px]",
+                  "col-span-12 sm:col-span-6 lg:col-span-5",
+                  "transition-all duration-300",
+                  "hover:shadow-lg hover:scale-[1.02]",
+                  "border border-default-200",
+                  "bg-card",
+                  "shadow-md"
+                )}
+                style={{ marginBottom: "1.5rem" }}
+              >
+                <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                  <p className="text-tiny text-white/60 uppercase font-bold">
+                    New
+                  </p>
+                  <h4 className="text-black font-medium text-2xl">
+                    {news.title}
+                  </h4>
+                </CardHeader>
+                <Image
+                  removeWrapper
+                  alt={news.title}
+                  className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
+                  src={news.imageUrl || "https://placehold.co/400x300"}
+                  style={{ aspectRatio: "16 / 9" }}
+                />
+                <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
+                  <div className="flex flex-grow gap-2 items-center">
+                    <Image
+                      alt="News source icon"
+                      className="rounded-full w-10 h-11 bg-white"
+                      src={GUARDIAN_URL}
+                    />
+                    <div className="flex flex-col">
+                      <p className="text-tiny text-white/60">
+                        {news.source.name}
+                      </p>
+                      <p className="text-tiny text-white/60">
+                        Get the latest news.
+                      </p>
+                    </div>
+                  </div>
+                  <Link href={news.url} isExternal>
+                    <Button
+                      className="text-tiny"
+                      color="primary"
+                      radius="full"
+                      size="sm"
+                    >
+                      Read More
+                    </Button>
+                  </Link>
+                </CardFooter>
+              </Card>
+            );
+          } else {
+            const isLarge = index % 6 === 0;
+            return (
+              <Card
+                key={index}
+                className={cn(
+                  "col-span-12 sm:col-span-6",
+                  isLarge
+                    ? "lg:col-span-8 h-[400px]"
+                    : "lg:col-span-4 h-[300px]",
+                  "transition-all duration-300",
+                  "hover:shadow-lg hover:scale-[1.02]",
+                  "border border-default-200",
+                  "bg-card",
+                  "shadow-md"
+                )}
+                style={{ marginBottom: "1.5rem" }}
+              >
+                <CardHeader className="absolute z-10 top-1 flex-col items-start">
+                  <p className="text-tiny text-white/60 uppercase font-bold">
+                    More News
+                  </p>
+                  <h4
+                    className={cn(
+                      "text-white/90",
+                      isLarge ? "font-medium text-2xl" : "font-medium text-xl"
+                    )}
                   >
-                    Read More
-                  </Button>
-                </Link>
-              </CardFooter>
-            </Card>
-          );
-        } else if (index === 3) {
-          return (
-            <Card
-              isFooterBlurred
-              key={index}
-              className={cn(
-                "w-full h-[300px]",
-                "col-span-12 sm:col-span-6 lg:col-span-5",
-                "transition-all duration-300",
-                "hover:shadow-lg hover:scale-[1.02]",
-                "border border-default-200",
-                "bg-card",
-                "shadow-md"
-              )}
-              style={{ marginBottom: "1.5rem" }}
-            >
-              <CardHeader className="absolute z-10 top-1 flex-col items-start">
-                <p className="text-tiny text-white/60 uppercase font-bold">
-                  New
-                </p>
-                <h4 className="text-black font-medium text-2xl">
-                  {news.title}
-                </h4>
-              </CardHeader>
-              <Image
-                removeWrapper
-                alt={news.title}
-                className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
-                src={news.imageUrl || "https://placehold.co/400x300"}
-                style={{ aspectRatio: "16 / 9" }}
-              />
-              <CardFooter className="absolute bg-white/30 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">
-                <div className="flex flex-grow gap-2 items-center">
-                  <Image
-                    alt="News source icon"
-                    className="rounded-full w-10 h-11 bg-white"
-                    src={GUARDIAN_URL}
-                  />
-                  <div className="flex flex-col">
-                    <p className="text-tiny text-white/60">
-                      {news.source.name}
-                    </p>
-                    <p className="text-tiny text-white/60">
-                      Get the latest news.
-                    </p>
+                    {news.title}
+                  </h4>
+                </CardHeader>
+                <Image
+                  removeWrapper
+                  alt={news.title}
+                  className="z-0 w-full h-full object-cover rounded-t-lg"
+                  src={news.imageUrl || "https://placehold.co/400x300"}
+                  style={{ aspectRatio: "16 / 9" }}
+                />
+                <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
+                  <div className="flex flex-grow gap-2 items-center">
+                    <Image
+                      alt="News source icon"
+                      className="rounded-full w-10 h-11 bg-white"
+                      src={GUARDIAN_URL}
+                    />
+                    <div className="flex flex-col">
+                      <p className="text-tiny text-white/60">
+                        {news.source.name}
+                      </p>
+                      <p className="text-tiny text-white/60">
+                        Get the latest news.
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <Link href={news.url} isExternal>
-                  <Button
-                    className="text-tiny"
-                    color="primary"
-                    radius="full"
-                    size="sm"
-                  >
-                    Read More
-                  </Button>
-                </Link>
-              </CardFooter>
-            </Card>
-          );
-        } else {
-          const isLarge = index % 6 === 0;
-          return (
-            <Card
-              key={index}
-              className={cn(
-                "col-span-12 sm:col-span-6",
-                isLarge ? "lg:col-span-8 h-[400px]" : "lg:col-span-4 h-[300px]",
-                "transition-all duration-300",
-                "hover:shadow-lg hover:scale-[1.02]",
-                "border border-default-200",
-                "bg-card",
-                "shadow-md"
-              )}
-              style={{ marginBottom: "1.5rem" }}
-            >
-              <CardHeader className="absolute z-10 top-1 flex-col items-start">
-                <p className="text-tiny text-white/60 uppercase font-bold">
-                  More News
-                </p>
-                <h4
-                  className={cn(
-                    "text-white/90",
-                    isLarge ? "font-medium text-2xl" : "font-medium text-xl"
-                  )}
-                >
-                  {news.title}
-                </h4>
-              </CardHeader>
-              <Image
-                removeWrapper
-                alt={news.title}
-                className="z-0 w-full h-full object-cover rounded-t-lg"
-                src={news.imageUrl || "https://placehold.co/400x300"}
-                style={{ aspectRatio: "16 / 9" }}
-              />
-              <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
-                <div className="flex flex-grow gap-2 items-center">
-                  <Image
-                    alt="News source icon"
-                    className="rounded-full w-10 h-11 bg-white"
-                    src={GUARDIAN_URL}
-                  />
-                  <div className="flex flex-col">
-                    <p className="text-tiny text-white/60">
-                      {news.source.name}
-                    </p>
-                    <p className="text-tiny text-white/60">
-                      Get the latest news.
-                    </p>
-                  </div>
-                </div>
-                <Link href={news.url} isExternal>
-                  <Button radius="full" size="sm">
-                    Read More
-                  </Button>
-                </Link>
-              </CardFooter>
-            </Card>
-          );
-        }
-      })}
-    </div>
+                  <Link href={news.url} isExternal>
+                    <Button radius="full" size="sm">
+                      Read More
+                    </Button>
+                  </Link>
+                </CardFooter>
+              </Card>
+            );
+          }
+        })}
+      </div>
+      <div className="mt-10">
+        <Footer />
+      </div>
+    </>
   );
 }

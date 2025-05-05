@@ -8,9 +8,9 @@ import { Alert } from "@heroui/alert";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Progress } from "@heroui/progress";
-import { AlertCircle } from "lucide-react";
 import { Search } from "lucide-react";
 import { Spinner } from "@heroui/react";
+import Footer from "@/components/footer";
 
 const TrackerPage = () => {
   const [trackingNumber, setTrackingNumber] = useState("");
@@ -172,194 +172,199 @@ const TrackerPage = () => {
   };
 
   return (
-    <div className="flex  justify-center sm:px-6 lg:px-8">
-      <div className="w-full max-w-2xl space-y-8">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">
-            Track Your Invoice
-          </h2>
-          <p className="mt-2 text-sm text-default-500">
-            Enter your 14-digit tracking number to get the latest status of your
-            invoice.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="space-y-4"
-        >
-          <div className="flex items-center gap-4">
-            <Input
-              type="text"
-              placeholder="Enter 14-digit tracking number"
-              value={trackingNumber}
-              onChange={(e) => setTrackingNumber(e.target.value)}
-              className={cn(
-                "w-full",
-                error &&
-                  "border-red-500 focus:ring-red-500 focus:border-red-500",
-                loading && "opacity-50 cursor-not-allowed" // Style for loading state
-              )}
-              disabled={loading} // Disable input during loading
-            />
-            <Button
-              onClick={handleSearch}
-              disabled={loading} // Disable button during loading
-              className={cn(
-                "min-w-[100px]", // Ensure button has a minimum width
-                loading ? "opacity-70 cursor-not-allowed" : "" // Style for loading
-              )}
-            >
-              {loading ? (
-                <Spinner className="px-10" size="sm" />
-              ) : (
-                <>
-                  <Search className="mr-2 h-10 w-10" />
-                  Search
-                </>
-              )}
-            </Button>
-          </div>
-          {error && (
-            <Alert variant="solid">
-              <strong>Error</strong>
-              <span>{error}</span>
-            </Alert>
-          )}
-        </motion.div>
-
-        {invoiceData && (
+    <>
+      <div className="flex  justify-center sm:px-6 lg:px-8">
+        <div className="w-full max-w-2xl space-y-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
           >
-            <Card className="shadow-lg border-0">
-              <CardHeader>
-                <div className="flex justify-between items-start w-full">
-                  <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
-                    Invoice #{invoiceData.invoiceNumber}
-                  </h3>
-                  <h5 className="text-sm text-default-500">
-                    Status: {invoiceData.status}
-                  </h5>
-                </div>
-              </CardHeader>
-              <CardBody className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-sm font-medium text-default-500">
-                      Payment From:
-                    </p>
-                    <p className="text-gray-900 dark:text-white">
-                      {invoiceData.paymentFrom}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-default-500">
-                      Payment To:
-                    </p>
-                    <p className="text-gray-900 dark:text-white">
-                      {invoiceData.paymentTo}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-default-500">
-                      Payment Date:
-                    </p>
-                    <p className="text-gray-900 dark:text-white">
-                      {invoiceData.paymentDate}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-default-500">
-                      Due Date:
-                    </p>
-                    <p className="text-gray-900 dark:text-white">
-                      {invoiceData.dueDate}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-default-500">
-                      Amount:
-                    </p>
-                    <p className="text-gray-900 dark:text-white">
-                      {invoiceData.amount}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-default-500">
-                      Payment Method:
-                    </p>
-                    <p className="text-gray-900 dark:text-white">
-                      {invoiceData.paymentMethod}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-default-500">
-                      Account Last 4 Digits:
-                    </p>
-                    <p className="text-gray-900 dark:text-white">
-                      {invoiceData.accountLast4Digits}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-default-500">
-                      Estimated Arrival:
-                    </p>
-                    <p className="text-gray-900 dark:text-white">
-                      {invoiceData.estimatedArrival}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-default-500">
-                      Bill Created On:
-                    </p>
-                    <p className="text-gray-900 dark:text-white">
-                      {invoiceData.billCreatedOn}
-                    </p>
-                  </div>
-                </div>
-              </CardBody>
-              <CardFooter className="space-y-4">
-                <div className="flex justify-between items-start w-full gap-2">
-                  {stages.map((stage, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col items-center w-1/4"
-                    >
-                      <Progress
-                        value={
-                          getProgressValue(invoiceData.status) >=
-                          getProgressValue(stage.label)
-                            ? 100
-                            : 0
-                        }
-                        className={cn(
-                          "h-2 w-full",
-                          index > 0 && "ml-2", // Add left margin for spacing
-                          "bg-default-200"
-                        )}
-                      />
-                      <span className="text-xs mt-2 text-center text-default-500">
-                        {stage.label}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </CardFooter>
-            </Card>
+            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">
+              Track Your Payments
+            </h2>
+            <p className="mt-2 text-sm text-default-500">
+              Enter your 14-digit tracking number to get the latest status of
+              your invoice.
+            </p>
           </motion.div>
-        )}
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="space-y-4"
+          >
+            <div className="flex items-center gap-4">
+              <Input
+                type="text"
+                placeholder="Enter 14-digit tracking number"
+                value={trackingNumber}
+                onChange={(e) => setTrackingNumber(e.target.value)}
+                className={cn(
+                  "w-full",
+                  error &&
+                    "border-red-500 focus:ring-red-500 focus:border-red-500",
+                  loading && "opacity-50 cursor-not-allowed" // Style for loading state
+                )}
+                disabled={loading} // Disable input during loading
+              />
+              <Button
+                onClick={handleSearch}
+                disabled={loading} // Disable button during loading
+                className={cn(
+                  "min-w-[100px]", // Ensure button has a minimum width
+                  loading ? "opacity-70 cursor-not-allowed" : "" // Style for loading
+                )}
+              >
+                {loading ? (
+                  <Spinner className="px-10" size="sm" />
+                ) : (
+                  <>
+                    <Search className="mr-2 h-10 w-10" />
+                    Search
+                  </>
+                )}
+              </Button>
+            </div>
+            {error && (
+              <Alert variant="solid">
+                <strong>Error</strong>
+                <span>{error}</span>
+              </Alert>
+            )}
+          </motion.div>
+
+          {invoiceData && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <Card className="shadow-lg border-0">
+                <CardHeader>
+                  <div className="flex justify-between items-start w-full">
+                    <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                      Invoice #{invoiceData.invoiceNumber}
+                    </h3>
+                    <h5 className="text-sm text-default-500">
+                      Status: {invoiceData.status}
+                    </h5>
+                  </div>
+                </CardHeader>
+                <CardBody className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm font-medium text-default-500">
+                        Payment From:
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {invoiceData.paymentFrom}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-default-500">
+                        Payment To:
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {invoiceData.paymentTo}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-default-500">
+                        Payment Date:
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {invoiceData.paymentDate}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-default-500">
+                        Due Date:
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {invoiceData.dueDate}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-default-500">
+                        Amount:
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {invoiceData.amount}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-default-500">
+                        Payment Method:
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {invoiceData.paymentMethod}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-default-500">
+                        Account Last 4 Digits:
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {invoiceData.accountLast4Digits}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-default-500">
+                        Estimated Arrival:
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {invoiceData.estimatedArrival}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-default-500">
+                        Bill Created On:
+                      </p>
+                      <p className="text-gray-900 dark:text-white">
+                        {invoiceData.billCreatedOn}
+                      </p>
+                    </div>
+                  </div>
+                </CardBody>
+                <CardFooter className="space-y-4">
+                  <div className="flex justify-between items-start w-full gap-2">
+                    {stages.map((stage, index) => (
+                      <div
+                        key={index}
+                        className="flex flex-col items-center w-1/4"
+                      >
+                        <Progress
+                          value={
+                            getProgressValue(invoiceData.status) >=
+                            getProgressValue(stage.label)
+                              ? 100
+                              : 0
+                          }
+                          className={cn(
+                            "h-2 w-full",
+                            index > 0 && "ml-2", // Add left margin for spacing
+                            "bg-default-200"
+                          )}
+                        />
+                        <span className="text-xs mt-2 text-center text-default-500">
+                          {stage.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </CardFooter>
+              </Card>
+            </motion.div>
+          )}
+        </div>
       </div>
-    </div>
+      <div className="flex justify-center mt-20">
+        <Footer />
+      </div>
+    </>
   );
 };
 

@@ -11,6 +11,7 @@ import {
   Bolt,
   Users, 
 } from "lucide-react";
+import Footer from "@/components/footer";
 
 // Animation variants
 const containerVariants = {
@@ -163,15 +164,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <footer
-        className="py-12 text-center text-gray-400"
-        style={{ userSelect: "none" }}
-      >
-        <p>
-          &copy; {new Date().getFullYear()} Global Finance Inc. All rights
-          reserved.
-        </p>{" "}
-        {/* Updated */}
+      <footer style={{ userSelect: "none" }}>
+        <Footer />
       </footer>
     </div>
   );
