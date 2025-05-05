@@ -3,10 +3,8 @@ export const emailTemplate = `
     <table style="width: 100%; border-collapse: collapse;">
       <tr>
         <td style="padding: 20px 0; text-align: center; background-color: #f0f4f8;">
-    <a href="https://yourwebsite.com" style="display: inline-block;">
-        <img src="https://storage.cloud.google.com/konnect-asset-bucket/konnect.png" alt="Konnect Logo" width="150" style="margin: 0; border: none; display: block; margin-left: auto; margin-right: auto;">
-    </a>
-</td>
+          <h1 style="color: #007bff; margin: 0;">Konnect</h1> <p style="margin-top:0px; font-size:14px">Your Financial Control Center</p>
+        </td>
       </tr>
       <tr>
         <td style="padding: 20px;">

@@ -37,10 +37,8 @@ const fetchCanadianFinancialNews = async (): Promise<NewsArticle[]> => {
   const apiUrl = `https://content.guardianapis.com/search?section=business&format=json&show-fields=all,thumbnail&api-key=${GUARDIAN_API_KEY}&q=canada`;
 
   try {
-    console.log("Fetching news from The Guardian API...");
     const response = await axios.get(apiUrl);
     const data = response.data;
-    console.log("Guardian API response:", data);
 
     if (data.response?.status === "ok" && data.response.results) {
       const articles: NewsArticle[] = data.response.results.map(
