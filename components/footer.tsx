@@ -1,24 +1,86 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
-import {
-  Mail,
-  ChevronRight,
-  Facebook,
-  Twitter,
-  Linkedin,
-} from "lucide-react";
+import { Mail, ChevronRight, Facebook, Twitter, Linkedin } from "lucide-react";
 import Link from "next/link";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { cn } from "@/lib/utils";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [isSubscribing, setIsSubscribing] = useState(false);
+
+  const handleSubscribe = async () => {
+    setIsSubscribing(true);
+   
+
+    if (!email) {
+      toast.error("Please enter a valid email address.");
+      setIsSubscribing(false);
+      return;
+    }
+
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address.");
+      setIsSubscribing(false);
+      return;
+    }
+
+    try {
+      console.log("Sending email to:", email); // Debugging line
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to: email, //  CHANGE THIS
+          subject: "New Subscription",
+          body: `New subscriber: ${email}`,
+        }),
+      });
+
+      // **Important:** Check the content type before parsing as JSON
+      const contentType = response.headers.get("content-type");
+      let data;
+      if (contentType && contentType.includes("application/json")) {
+        data = await response.json();
+      } else {
+        // If it's not JSON, assume it's HTML (or some other text format) and handle accordingly
+        const text = await response.text();
+        console.error("Unexpected response type.  Expected JSON, got:", text);
+        toast.error("Failed to subscribe.  Server returned an unexpected response.");
+        setIsSubscribing(false);
+        return; // IMPORTANT:  Exit the function to prevent further errors
+      }
+
+      if (response.ok) {
+        toast.success("Successfully subscribed! Check your email for confirmation.");
+        setEmail("");
+      } else {
+        toast.error(`Failed to subscribe: ${data.message || "Unknown error"}`);
+      }
+    } catch (error: any) {
+      console.error("Error subscribing:", error);
+      toast.error(`Failed to subscribe: ${error.message || "Unknown error"}`);
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
+
   return (
     <footer className="text-default-500 py-12 md:py-16">
+      <ToastContainer />
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* About Us Section */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-default-500">About Us</h3>
-            <p className="text-sm">
+            <h3 className="text-lg font-semibold text-white">About Us</h3>
+            <p className="text-sm text-gray-400">
               Konnect is a platform dedicated to connecting people and resources
               globally. We strive to provide valuable information and
               opportunities to our users.
@@ -38,20 +100,10 @@ const Footer = () => {
 
           {/* Contact Information */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-default-500">Contact</h3>
-            {/* <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-gray-400" />
-              <span className="text-sm">
-                123 Main Street, Anytown, CA 12345
-              </span>
-            </div> */}
-            {/* <div className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-gray-400" />
-              <span className="text-sm">+1 (555) 123-4567</span>
-            </div> */}
+            <h3 className="text-lg font-semibold text-white">Contact</h3>
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-gray-400" />
-              <span className="text-sm">info@konnect.com</span>
+              <span className="text-sm text-gray-400">info@konnect.com</span>
             </div>
           </div>
 
@@ -60,31 +112,31 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-white">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a
+                <Link
                   href="/"
-                  className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2"
+                  className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2 text-gray-400"
                 >
                   <ChevronRight className="h-4 w-4" />
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/news"
-                  className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2"
+                  className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2 text-gray-400"
                 >
                   <ChevronRight className="h-4 w-4" />
                   News
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/about"
-                  className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2"
+                  className="text-sm hover:text-blue-400 transition-colors flex items-center gap-2 text-gray-400"
                 >
                   <ChevronRight className="h-4 w-4" />
                   About Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -92,7 +144,7 @@ const Footer = () => {
           {/* Newsletter Subscription */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-white">Newsletter</h3>
-            <p className="text-sm">
+            <p className="text-sm text-gray-400">
               Subscribe to our newsletter to receive the latest updates and
               news.
             </p>
@@ -100,26 +152,46 @@ const Footer = () => {
               <Input
                 type="email"
                 placeholder="Enter your email"
-                className="text-sm border-gray-700 text-white placeholder:text-gray-400 border-radius-md focus:ring-blue-500 focus:border-blue-500"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="text-sm border-gray-700 text-white placeholder:text-gray-400 focus:ring-blue-500 focus:border-blue-500 w-full sm:w-auto"
+                disabled={isSubscribing}
               />
               <Button
                 variant="solid"
-                className="bg-blue-500 hover:bg-blue-600 text-white text-sm"
+                className="bg-blue-500 hover:bg-blue-600 text-white text-sm w-full sm:w-auto"
+                onClick={handleSubscribe}
+                disabled={isSubscribing}
               >
-                Subscribe
+                {isSubscribing ? "Subscribing..." : "Subscribe"}
               </Button>
             </div>
-            <div className="mt-4 text-xs text-gray-400">
+            {/* {message.type && (
+              <div
+                className={cn(
+                  "mt-4 text-sm rounded-md p-2",
+                  message.type === "success"
+                    ? "bg-green-500/20 text-green-400"
+                    : "bg-red-500/20 text-red-400"
+                )}
+              >
+                {message.text}
+              </div>
+            )} */}
+            <div className="mt-4 text-xs text-gray-500">
               By subscribing, you agree to our{" "}
-              <a href="/privacy-policy" className="underline">
+              <Link
+                href="/privacy-policy"
+                className="underline text-gray-400 hover:text-blue-400"
+              >
                 Privacy Policy
-              </a>
+              </Link>
               .
             </div>
           </div>
         </div>
         <hr className="my-8 border-gray-700" />
-        <div className="text-center text-sm">
+        <div className="text-center text-sm text-gray-400">
           &copy; {new Date().getFullYear()} Konnect. All rights reserved. |{" "}
           <Link
             href="/terms-and-conditions"
@@ -141,3 +213,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
