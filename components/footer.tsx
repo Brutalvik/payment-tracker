@@ -8,6 +8,7 @@ import Link from "next/link";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { cn } from "@/lib/utils";
+import { emailTemplate } from "@/app/templates/Subscribe/template"
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -15,7 +16,6 @@ const Footer = () => {
 
   const handleSubscribe = async () => {
     setIsSubscribing(true);
-   
 
     if (!email) {
       toast.error("Please enter a valid email address.");
@@ -32,15 +32,22 @@ const Footer = () => {
 
     try {
       console.log("Sending email to:", email); // Debugging line
+
+      // Prepare the email body using the template
+      const emailBody = emailTemplate
+        .replace("${email}", email) // Use the email the user entered
+        .replace("${subscriptionDate}", new Date().toLocaleDateString()) // Example dynamic data
+        .replace("${currentYear}", new Date().getFullYear().toString());
+
       const response = await fetch("/api/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          to: email, //  CHANGE THIS
+          to: email,
           subject: "New Subscription",
-          body: `New subscriber: ${email}`,
+          body: emailBody, // Use the templated emailBody here
         }),
       });
 
@@ -53,13 +60,17 @@ const Footer = () => {
         // If it's not JSON, assume it's HTML (or some other text format) and handle accordingly
         const text = await response.text();
         console.error("Unexpected response type.  Expected JSON, got:", text);
-        toast.error("Failed to subscribe.  Server returned an unexpected response.");
+        toast.error(
+          "Failed to subscribe.  Server returned an unexpected response."
+        );
         setIsSubscribing(false);
         return; // IMPORTANT:  Exit the function to prevent further errors
       }
 
       if (response.ok) {
-        toast.success("Successfully subscribed! Check your email for confirmation.");
+        toast.success(
+          "Successfully subscribed! Check your email for confirmation."
+        );
         setEmail("");
       } else {
         toast.error(`Failed to subscribe: ${data.message || "Unknown error"}`);
@@ -166,18 +177,6 @@ const Footer = () => {
                 {isSubscribing ? "Subscribing..." : "Subscribe"}
               </Button>
             </div>
-            {/* {message.type && (
-              <div
-                className={cn(
-                  "mt-4 text-sm rounded-md p-2",
-                  message.type === "success"
-                    ? "bg-green-500/20 text-green-400"
-                    : "bg-red-500/20 text-red-400"
-                )}
-              >
-                {message.text}
-              </div>
-            )} */}
             <div className="mt-4 text-xs text-gray-500">
               By subscribing, you agree to our{" "}
               <Link
@@ -213,4 +212,3 @@ const Footer = () => {
 };
 
 export default Footer;
-

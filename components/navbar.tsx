@@ -20,7 +20,8 @@ import { ThemeSwitch } from "@/components/theme-switch";
 import {
   SearchIcon,
 } from "@/components/icons";
-import Konnect from "@/public/konnect.png";
+
+const KONNECT_LOGO_URL = process.env.NEXT_PUBLIC_KONNECT_LOGO_URL;
 
 export const Navbar = () => {
   // const searchInput = (
@@ -55,7 +56,7 @@ export const Navbar = () => {
             <img
               alt="Konnect"
               className="h-40 w-40 rounded-full" // Increased height and width
-              src={Konnect.src}
+              src={KONNECT_LOGO_URL}
             />
           </NextLink>
         </NavbarBrand>

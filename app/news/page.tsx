@@ -10,9 +10,7 @@ import Footer from "@/components/footer";
 
 //  Important:  NEXT_PUBLIC_  for client-side access
 const GUARDIAN_API_KEY = process.env.NEXT_PUBLIC_GUARDIAN_API_KEY;
-const GUARDIAN_URL = "https://i.postimg.cc/28Y7v3v0/guardian.png";
-
-console.log("GUARDIAN_API_KEY (from .env):", GUARDIAN_API_KEY);
+const GUARDIAN_LOGO_URL = process.env.NEXT_PUBLIC_GUARDIAN_URL;
 
 interface NewsArticle {
   error?: boolean;
@@ -24,7 +22,8 @@ interface NewsArticle {
 
 const fetchCanadianFinancialNews = async (): Promise<NewsArticle[]> => {
   if (!GUARDIAN_API_KEY) {
-    console.error("GUARDIAN_API_KEY is not set in environment variables.");
+    console.error("Guardian API key is missing.");
+    // Return a default error message if the API key is not available
     return [
       {
         error: true,
@@ -142,7 +141,7 @@ export default function BlogPage() {
                     <Image
                       alt="News source icon"
                       className="rounded-full w-10 h-11 bg-white"
-                      src={GUARDIAN_URL}
+                      src={GUARDIAN_LOGO_URL}
                     />
                     <div className="flex flex-col">
                       <p className="text-tiny text-white/60">
@@ -202,7 +201,7 @@ export default function BlogPage() {
                     <Image
                       alt="News source icon"
                       className="rounded-full w-10 h-11 bg-white"
-                      src={GUARDIAN_URL}
+                      src={GUARDIAN_LOGO_URL}
                     />
                     <div className="flex flex-col">
                       <p className="text-tiny text-white/60">
@@ -269,7 +268,7 @@ export default function BlogPage() {
                     <Image
                       alt="News source icon"
                       className="rounded-full w-10 h-11 bg-white"
-                      src={GUARDIAN_URL}
+                      src={GUARDIAN_LOGO_URL}
                     />
                     <div className="flex flex-col">
                       <p className="text-tiny text-white/60">
