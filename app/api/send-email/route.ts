@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { validateEmail } from "@/lib/utils"; // Assuming you have this utility
+import { validateEmail } from "@/lib/utils";
 
 export async function POST(req: NextRequest) {
   // Changed to named export POST
