@@ -12,6 +12,7 @@ import Footer from "@/components/footer";
 const GUARDIAN_API_KEY = process.env.NEXT_PUBLIC_GUARDIAN_API_KEY;
 const GUARDIAN_LOGO_URL = process.env.NEXT_PUBLIC_GUARDIAN_URL;
 
+
 interface NewsArticle {
   error?: boolean;
   title: string;
@@ -51,10 +52,8 @@ const fetchCanadianFinancialNews = async (): Promise<NewsArticle[]> => {
           };
         }
       );
-      console.log("Parsed articles:", articles);
       return articles;
     } else {
-      console.error("Failed to fetch news:", data);
       return [
         { title: "Failed to Load News", url: "#", source: { name: "Konnect" } },
       ];

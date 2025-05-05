@@ -12,24 +12,28 @@ import { Search } from "lucide-react";
 import { Spinner } from "@heroui/react";
 import Footer from "@/components/footer";
 
+interface InvoiceData {
+  invoiceNumber: string;
+  status: string;
+  paymentFrom: string;
+  paymentTo: string;
+  paymentDate: string;
+  dueDate: string;
+  amount: string;
+  paymentMethod: string;
+  accountLast4Digits: string;
+  estimatedArrival: string;
+  billCreatedOn: string;
+}
+
+const GET_INVOICE_URL =
+  process.env.NEXT_PUBLIC_GOOGLE_CLOUD_FUNCTION_GET_INVOICE_DATA;
+
 const TrackerPage = () => {
   const [trackingNumber, setTrackingNumber] = useState("");
-  const [invoiceData, setInvoiceData] = useState<{
-    invoiceNumber: string;
-    status: string;
-    paymentFrom: string;
-    paymentTo: string;
-    paymentDate: string;
-    dueDate: string;
-    amount: string;
-    paymentMethod: string;
-    accountLast4Digits: string;
-    estimatedArrival: string;
-    billCreatedOn: string;
-  } | null>(null);
+  const [invoiceData, setInvoiceData] = useState<InvoiceData | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false); // Added loading state
-  
+  const [loading, setLoading] = useState(false);
 
   // Progress bar stages and status mapping
   const stages = [
@@ -45,7 +49,7 @@ const TrackerPage = () => {
     "Payment Scheduled": 25,
     "Payment Initiated": 50,
     "Payment Sent": 75,
-    "PAID": 100,
+    PAID: 100,
   };
 
   const getProgressValue = (status: string) => {
@@ -64,110 +68,32 @@ const TrackerPage = () => {
     }
 
     setError(null);
-    setLoading(true); // Start loading
-    // Simulate fetching data from an API
+    setLoading(true);
     try {
-      // Replace this with your actual API call
-      await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate network delay
+      // Cloud Function.
+      const cloudFunctionUrl = `${GET_INVOICE_URL}${trackingNumber}`;
 
-      // Dummy data for demonstration
-      const dummyData: Record<
-        string,
-        {
-          invoiceNumber: string;
-          status: string;
-          paymentFrom: string;
-          paymentTo: string;
-          paymentDate: string;
-          dueDate: string;
-          amount: string;
-          paymentMethod: string;
-          accountLast4Digits: string;
-          estimatedArrival: string;
-          billCreatedOn: string;
+      const response = await fetch(cloudFunctionUrl);
+
+      if (!response.ok) {
+        if (response.status === 404) {
+          setError("Invoice not found. Please check your tracking number.");
+        } else {
+          setError(
+            `Failed to fetch data: ${response.status} ${response.statusText}`
+          );
         }
-      > = {
-        "95887512451553": {
-          invoiceNumber: "INV-2025-1553",
-          status: "Draft Payment",
-          paymentFrom: "Stryden Inc.",
-          paymentTo: "Sasi Jonnadula",
-          paymentDate: "May 14, 2025",
-          dueDate: "May 28, 2025",
-          amount: "$55,375.00",
-          paymentMethod: "EFT",
-          accountLast4Digits: "XXXXXXXX2438",
-          estimatedArrival: "May 28, 2025",
-          billCreatedOn: "May 2, 2025",
-        },
-        "87654321": {
-          invoiceNumber: "INV-2024-1002",
-          status: "PAID",
-          paymentFrom: "Acme Corp",
-          paymentTo: "Jane Smith",
-          paymentDate: "May 1, 2025",
-          dueDate: "May 15, 2025",
-          amount: "$2,500.00",
-          paymentMethod: "Credit Card",
-          accountLast4Digits: "4242",
-          estimatedArrival: "May 1, 2025",
-          billCreatedOn: "April 1, 2025",
-        },
-        "24681357": {
-          invoiceNumber: "INV-2024-1003",
-          status: "DRAFT",
-          paymentFrom: "Beta Co",
-          paymentTo: "Robert Jones",
-          paymentDate: "June 1, 2025",
-          dueDate: "June 15, 2025",
-          amount: "$1,250.00",
-          paymentMethod: "Check",
-          accountLast4Digits: "9876",
-          estimatedArrival: "June 5, 2025",
-          billCreatedOn: "May 1, 2025",
-        },
-        "98765432": {
-          //Added for testing
-          invoiceNumber: "INV-2024-1004",
-          status: "SHIPPED",
-          paymentFrom: "Gamma Ltd",
-          paymentTo: "Alice Brown",
-          paymentDate: "July 1, 2025",
-          dueDate: "July 15, 2025",
-          amount: "$750.00",
-          paymentMethod: "PayPal",
-          accountLast4Digits: "1234",
-          estimatedArrival: "July 10, 2025",
-          billCreatedOn: "June 1, 2025",
-        },
-        "11223344": {
-          //Added for testing
-          invoiceNumber: "INV-2024-1005",
-          status: "DELIVERED",
-          paymentFrom: "Delta Inc",
-          paymentTo: "Bob Williams",
-          paymentDate: "Aug 1, 2025",
-          dueDate: "Aug 15, 2025",
-          amount: "$1000.00",
-          paymentMethod: "Stripe",
-          accountLast4Digits: "5678",
-          estimatedArrival: "Aug 5, 2025",
-          billCreatedOn: "July 1, 2025",
-        },
-      };
-
-      const data = dummyData[trackingNumber];
-      if (data) {
-        setInvoiceData(data);
-      } else {
-        setError("Invoice not found. Please check your tracking number.");
-        setInvoiceData(null); // Clear any previous data
+        setInvoiceData(null);
+        return;
       }
+
+      const data: InvoiceData = await response.json();
+      setInvoiceData(data);
     } catch (err: any) {
       setError("Failed to fetch invoice data: " + err.message);
       setInvoiceData(null);
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 
@@ -209,6 +135,8 @@ const TrackerPage = () => {
                   loading && "opacity-50 cursor-not-allowed" // Style for loading state
                 )}
                 disabled={loading} // Disable input during loading
+                aria-label="Tracking Number"
+                aria-describedby="tracking-number-input"
               />
               <Button
                 onClick={handleSearch}
@@ -217,6 +145,7 @@ const TrackerPage = () => {
                   "min-w-[100px]", // Ensure button has a minimum width
                   loading ? "opacity-70 cursor-not-allowed" : "" // Style for loading
                 )}
+                aria-labelledby="Search"
               >
                 {loading ? (
                   <Spinner className="px-10" size="sm" />
@@ -331,7 +260,7 @@ const TrackerPage = () => {
                 </CardBody>
                 <CardFooter className="space-y-4">
                   <div className="flex justify-between items-start w-full gap-2">
-                    {stages.map((stage, index) => (
+                    {stages?.map((stage, index) => (
                       <div
                         key={index}
                         className="flex flex-col items-center w-1/4"
@@ -348,6 +277,7 @@ const TrackerPage = () => {
                             index > 0 && "ml-2", // Add left margin for spacing
                             "bg-default-200"
                           )}
+                          aria-label="Progress Bar"
                         />
                         <span className="text-xs mt-2 text-center text-default-500">
                           {stage.label}
