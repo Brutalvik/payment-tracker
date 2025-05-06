@@ -154,8 +154,8 @@ Terms Agreed: ${additionalInfo.termsAgreed ? "Yes" : "No"}`);
                 size="sm"
                 className="mt-6 text-md text-red-200 hover:text-red-100 hover:bg-red-800/50 border-red-400/80"
                 onClick={() => {
-        router.push('/'); // Redirect to the home page
-    }} 
+                  router.push("/"); // Redirect to the home page
+                }}
               >
                 <XCircle className="mr-2 h-4 w-4" />
                 Dismiss
@@ -303,7 +303,10 @@ Terms Agreed: ${additionalInfo.termsAgreed ? "Yes" : "No"}`);
                 />
                 <label htmlFor="termsAgreed" className="text-gray-300">
                   I agree to the{" "}
-                  <a href="#" className="text-purple-300 hover:underline">
+                  <a
+                    href="/terms-and-conditions"
+                    className="text-purple-300 hover:underline"
+                  >
                     Terms and Conditions
                   </a>
                 </label>
@@ -331,7 +334,7 @@ Terms Agreed: ${additionalInfo.termsAgreed ? "Yes" : "No"}`);
             </form>
             <div className="text-center text-gray-400 pt-4 border-t border-white/10">
               Already have an account?{" "}
-              <a href="#" className="text-purple-300 hover:underline">
+              <a href="/signup" className="text-purple-300 hover:underline">
                 Log in
               </a>
             </div>

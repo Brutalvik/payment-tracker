@@ -97,13 +97,13 @@ const Footer = () => {
               opportunities to our users.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-blue-400 transition-colors">
+              <a href="/" className="hover:text-blue-400 transition-colors">
                 <Facebook className="h-6 w-6" />
               </a>
-              <a href="#" className="hover:text-blue-400 transition-colors">
+              <a href="/" className="hover:text-blue-400 transition-colors">
                 <Twitter className="h-6 w-6" />
               </a>
-              <a href="#" className="hover:text-blue-400 transition-colors">
+              <a href="/" className="hover:text-blue-400 transition-colors">
                 <Linkedin className="h-6 w-6" />
               </a>
             </div>

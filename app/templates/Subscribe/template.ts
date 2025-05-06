@@ -10,10 +10,10 @@ export const emailTemplate = `
         <td style="padding: 20px;">
           <h2 style="color: #2c3e50; margin-bottom: 16px;">Welcome!</h2>
           <p style="font-size: 16px; line-height: 1.6;">
-            Thank you for subscribing to Konnect Finance.  We're excited to help you manage your payments and finances with ease.
+            Thank you for subscribing to Konnect Finance.  We are excited to help you manage your payments and finances with ease.
           </p>
           <p style="font-size: 16px; line-height: 1.6;">
-            Here's a quick summary of your subscription:
+            Here is a quick summary of your subscription:
           </p>
           <ul style="list-style-type: none; padding-left: 0; margin-bottom: 20px;">
             <li style="margin-bottom: 8px; font-size: 16px;">
@@ -38,7 +38,7 @@ export const emailTemplate = `
             </li>
            </ul>
           <p style="font-size: 16px; line-height: 1.6;">
-            <a href="#" style="color: #007bff; text-decoration: none; font-weight: bold;">Click here</a> to get started and explore your dashboard.
+            <a href="/" style="color: #007bff; text-decoration: none; font-weight: bold;">Click here</a> to get started and explore your dashboard.
           </p>
         </td>
       </tr>
