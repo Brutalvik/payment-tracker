@@ -8,8 +8,8 @@ const TermsAndConditionsPage = () => {
     <div className="min-h-screen bg-background text-foreground py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
         <div
-            className="text-center space-y-4"
-            style={{ userSelect: "none" }} // Added userSelect style
+          className="text-center space-y-4"
+          style={{ userSelect: "none" }} // Added userSelect style
         >
           <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
             Terms and Conditions
@@ -20,8 +20,9 @@ const TermsAndConditionsPage = () => {
           </p>
         </div>
 
-        <div className="text-left space-y-4"
-            style={{ userSelect: "none" }} // Added userSelect style
+        <div
+          className="text-left space-y-4"
+          style={{ userSelect: "none" }} // Added userSelect style
         >
           <section className="bg-card rounded-xl shadow-lg border border-border p-6 space-y-4">
             <h2 className="text-2xl font-semibold text-foreground">
@@ -102,7 +103,7 @@ const TermsAndConditionsPage = () => {
               Disclaimer of Warranties
             </h2>
             <p className="text-muted-foreground">
-              Our services are provided "as is" and "as available" without
+              Our services are provided as is and as available without
               warranties of any kind, either express or implied, including but
               not limited to warranties of merchantability, fitness for a
               particular purpose, or non-infringement.
@@ -120,13 +121,16 @@ const TermsAndConditionsPage = () => {
               intangible losses, arising out of or relating to your use of our
               services.
             </p>
-            <Alert variant="solid" className="mt-4"> 
-              <h3 >Limitation of Liability</h3>
+            <Alert variant="solid" className="mt-4">
+              <h3>Limitation of Liability</h3>
               <p className="text-muted-foreground">
-                To the fullest extent permitted by law, we shall not be liable for any damages resulting from your use of our services, including but not limited to direct, indirect, incidental, consequential, or punitive damages.
-                We are not responsible for any actions, claims, damages,
-                liabilities, losses, and expenses, including reasonable
-                attorneys' fees, arising from your use of our services.
+                To the fullest extent permitted by law, we shall not be liable
+                for any damages resulting from your use of our services,
+                including but not limited to direct, indirect, incidental,
+                consequential, or punitive damages. We are not responsible for
+                any actions, claims, damages, liabilities, losses, and expenses,
+                including reasonable attorneys fees, arising from your use of
+                our services.
               </p>
             </Alert>
           </section>
@@ -167,7 +171,7 @@ const TermsAndConditionsPage = () => {
           </section>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

@@ -143,7 +143,7 @@ Terms Agreed: ${additionalInfo.termsAgreed ? "Yes" : "No"}`);
                   Restricted Access
                 </span>
                 <div>
-                  We're sorry, but registration is not currently available in
+                  We are sorry, but registration is not currently available in
                   your country ({countryCodeData[countryCode].name}). We are
                   working to expand our services to more regions. Please check
                   back later.
