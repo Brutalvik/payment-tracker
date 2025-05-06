@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
@@ -11,6 +11,7 @@ import { Progress } from "@heroui/progress";
 import { Search } from "lucide-react";
 import { Spinner } from "@heroui/react";
 import Footer from "@/components/footer";
+import { useRouter } from "next/navigation";
 
 interface InvoiceData {
   invoiceNumber: string;
@@ -34,6 +35,7 @@ const TrackerPage = () => {
   const [invoiceData, setInvoiceData] = useState<InvoiceData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter(); // Initialize router
 
   // Progress bar stages and status mapping
   const stages = [
@@ -69,6 +71,10 @@ const TrackerPage = () => {
 
     setError(null);
     setLoading(true);
+
+    // Update the URL with the tracking number
+    router.push(`/tracker?trackingNumber=${trackingNumber}`);
+
     try {
       // Cloud Function.
       const cloudFunctionUrl = `${GET_INVOICE_URL}${trackingNumber}`;
@@ -96,6 +102,16 @@ const TrackerPage = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // Check for trackingNumber in query parameters on initial load
+    const urlParams = new URLSearchParams(window.location.search);
+    const trackingNumberParam = urlParams.get("trackingNumber");
+    if (trackingNumberParam) {
+      setTrackingNumber(trackingNumberParam);
+      handleSearch(); // Optionally, trigger the search immediately
+    }
+  }, []);
 
   return (
     <>
