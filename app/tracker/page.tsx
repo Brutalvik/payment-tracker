@@ -104,13 +104,15 @@ const TrackerPage = () => {
   };
 
   useEffect(() => {
-    // Check for trackingNumber in query parameters on initial load
-    const urlParams = new URLSearchParams(window.location.search);
-    const trackingNumberParam = urlParams.get("trackingNumber");
-    if (trackingNumberParam) {
-      setTrackingNumber(trackingNumberParam);
-      handleSearch(); // Optionally, trigger the search immediately
-    }
+    useEffect(() => {
+      // Check for trackingNumber in query parameters on initial load
+      const urlParams = new URLSearchParams(window.location.search);
+      const trackingNumberParam = urlParams.get("trackingNumber");
+      if (trackingNumberParam) {
+        setTrackingNumber(trackingNumberParam);
+        handleSearch(); // Trigger the search after the state is set
+      }
+    }, []);
   }, []);
 
   return (
