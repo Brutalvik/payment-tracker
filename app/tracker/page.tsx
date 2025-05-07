@@ -104,16 +104,23 @@ const TrackerPage = () => {
   };
 
   useEffect(() => {
-    useEffect(() => {
-      // Check for trackingNumber in query parameters on initial load
-      const urlParams = new URLSearchParams(window.location.search);
-      const trackingNumberParam = urlParams.get("trackingNumber");
-      if (trackingNumberParam) {
-        setTrackingNumber(trackingNumberParam);
-        handleSearch(); // Trigger the search after the state is set
-      }
-    }, []);
+    // Check for trackingNumber in query parameters on initial load
+    const urlParams = new URLSearchParams(window.location.search);
+    const trackingNumberParam = urlParams.get("trackingNumber");
+    if (trackingNumberParam) {
+      setTrackingNumber(trackingNumberParam);
+    }
   }, []);
+
+  useEffect(() => {
+    if (trackingNumber) {
+      setLoading(true);
+      setError(null);
+      // Fetch invoice data when tracking number changes
+      handleSearch();
+    }
+  }, [trackingNumber]);
+  
 
   return (
     <>
