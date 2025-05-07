@@ -75,7 +75,6 @@ const PrivacyPolicyPage = () => {
               <li>Business partners with your consent.</li>
             </ul>
             <Alert variant="solid" className="mt-4">
-              
               <h1>Note</h1> {/* Added AlertTitle and h3 */}
               <p className="text-muted-foreground">
                 We do not sell your personal information to third parties. We do
@@ -139,12 +138,12 @@ const PrivacyPolicyPage = () => {
             </p>
             <div className="flex items-center gap-2 text-muted-foreground">
               <Mail className="h-4 w-4" />
-              <span>privacy@konnect.com</span>
+              <span>privacy@konnectfinance.online</span>
             </div>
           </section>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

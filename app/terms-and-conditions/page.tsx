@@ -167,7 +167,9 @@ const TermsAndConditionsPage = () => {
               If you have any questions about these terms and conditions, please
               contact us at:
             </p>
-            <p className="text-muted-foreground">Email: support@example.com</p>
+            <p className="text-muted-foreground">
+              Email: info@konnectfinance.online
+            </p>
           </section>
         </div>
       </div>

@@ -35,7 +35,7 @@ const fetchCanadianFinancialNews = async (): Promise<NewsArticle[]> => {
     ];
   }
 
-  const apiUrl = `https://content.guardianapis.com/search?section=business&format=json&show-fields=all,thumbnail&api-key=${GUARDIAN_API_KEY}&q=canada`;
+  const apiUrl = `https://content.guardianapis.com/search?section=business&format=json&show-fields=all,thumbnail&api-key=${GUARDIAN_API_KEY}&q=canada&order-by=newest`; 
 
   try {
     const response = await axios.get(apiUrl);
