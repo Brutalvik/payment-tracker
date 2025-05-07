@@ -38,7 +38,7 @@ export const emailTemplate = `
             </li>
            </ul>
           <p style="font-size: 16px; line-height: 1.6;">
-            <a href="/" style="color: #007bff; text-decoration: none; font-weight: bold;">Click here</a> to get started and explore your dashboard.
+            <a href="www.konnectfinance.online" style="color: #007bff; text-decoration: none; font-weight: bold;">Click here</a> to get started and explore your dashboard.
           </p>
         </td>
       </tr>

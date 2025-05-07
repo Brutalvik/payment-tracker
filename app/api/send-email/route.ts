@@ -17,8 +17,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    console.log("Sending email to:", to); // Debugging line
-
     if (!validateEmail(to)) {
       return NextResponse.json(
         { message: "Invalid email address." },
