@@ -114,7 +114,9 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-white">Contact</h3>
             <div className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-gray-400" />
-              <span className="text-sm text-gray-400">info@konnect.com</span>
+              <span className="text-sm text-gray-400">
+                info@konnectfinance.online
+              </span>
             </div>
           </div>
 
